@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Box, Spinner } from '@chakra-ui/react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -23,8 +23,6 @@ const Kitsune = () => {
   );
   const [scene] = useState(new THREE.Scene());
   const [_controls, setControls] = useState();
-
-  /* eslint-disable react-hooks */
 
   useEffect(() => {
     const { current: container } = refContainer;
