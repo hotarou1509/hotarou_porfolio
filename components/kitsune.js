@@ -16,7 +16,7 @@ const Kitsune = () => {
   const [target] = useState(new THREE.Vector3(-0.5, 1.2, 0));
   const [initialCameraPosition] = useState(
     new THREE.Vector3(
-      40 * Math.sin(0.3 * Math.PI),
+      60 * Math.sin(0.3 * Math.PI),
       10,
       20 * Math.cos(0.3 * Math.PI)
     )
@@ -42,7 +42,7 @@ const Kitsune = () => {
 
       // 640 -> 240
       // 8 -> 6
-      const scale = scH * 0.005 + 5.8;
+      const scale = scH * 0.005 + 8.8;
       const camera = new THREE.OrthographicCamera(
         -scale,
         scale,
@@ -55,12 +55,12 @@ const Kitsune = () => {
       camera.lookAt(target);
       setCamera(camera);
 
-      const ambientLight = new THREE.AmbientLight(0xaaaaaa, 0.8);
+      const ambientLight = new THREE.AmbientLight(0x101010, 1);
       scene.add(ambientLight);
 
       // START HERE
-      const light = new THREE.DirectionalLight(0xffffff, 0.5, 100);
-      light.position.set(1, 0, 1); //default; light shining from top
+      const light = new THREE.DirectionalLight(0xffffff, 1, 100);
+      light.position.set(1, 1, 1); //default; light shining from top
       light.castShadow = true; // default false
       scene.add(light);
 
@@ -76,9 +76,9 @@ const Kitsune = () => {
       controls.target = target;
       setControls(controls);
 
-      loadGLTFModel(scene, '/kitsune.glb', {
-        reiceiveShadow: false,
-        castShadow: false,
+      loadGLTFModel(scene, '/kitsune/kitsune.gltf', '/sakura/scene.gltf', {
+        reiceiveShadow: true,
+        castShadow: true,
       }).then(() => {
         animate();
         setLoading(false);
