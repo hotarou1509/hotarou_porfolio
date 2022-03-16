@@ -13,8 +13,8 @@ const Works = () => (
 
       <SimpleGrid column={[1, 1, 2]} gap={6}>
         <Section>
-          <WorkGridItem id="inkdrop" title="Inkdrop" thumbnail={hotarou}>
-            A mark-down note taking app
+          <WorkGridItem id="mstlink" title="MST Link" thumbnail={hotarou}>
+            A VSAT simulator app
           </WorkGridItem>
         </Section>
       </SimpleGrid>

@@ -25,14 +25,15 @@ const Page = () => {
           textAlign="center"
           bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
         >
-          Hello, I&apos;m a front-end developer based in Danang!
+          Hello, I&apos;m a front-end developer and a blockchain engineer based
+          in Danang!
         </Box>
         <Box display={{ md: 'flex' }}>
           <Box flexGrow={1}>
             <Heading as="h2" variant="page-title">
               Thai Viet Le
             </Heading>
-            <p>Front-end Developer ( ReactJS / NextJS )</p>
+            <p>( ReactJS / NextJS / Golang )</p>
           </Box>
           <Box
             flexShrink={0}
@@ -57,9 +58,12 @@ const Page = () => {
             Work
           </Heading>
           <Paragraph>
-            Hello, I&apos;m a front-end developer based in Danang!{' '}
+            Hello, I&apos;m a frontend developer and blockchain engineer based
+            in Danang! I've acquired high level experience in web design and
+            development knowledge, producing quality work. Here are some of my
+            public{' '}
             <NextLink href="/works/project">
-              <Link>Project</Link>
+              <Link>Projects</Link>
             </NextLink>
             .
           </Paragraph>
@@ -81,11 +85,13 @@ const Page = () => {
           </BioSection>
           <BioSection>
             <BioYear>2019</BioYear>
-            Completed the ...
+            Completed the Degree of Electronics and Telecommunication
+            Engineering at Military Technical Academy (Hanoi).
           </BioSection>
           <BioSection>
             <BioYear>2020</BioYear>
-            Worked at intX Vietnam
+            Worked at intX Vietnam as frontend developer and blockchain
+            engineer.
           </BioSection>
         </Section>
       </Container>
