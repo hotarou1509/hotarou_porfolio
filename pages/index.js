@@ -59,9 +59,9 @@ const Page = () => {
           </Heading>
           <Paragraph>
             Hello, I&apos;m a frontend developer and blockchain engineer based
-            in Danang! I've acquired high level experience in web design and
-            development knowledge, producing quality work. Here are some of my
-            public{' '}
+            in Danang! I&apos;ve acquired high level experience in web design
+            and development knowledge, producing quality work. Here are some of
+            my public{' '}
             <NextLink href="/works/project">
               <Link>Projects</Link>
             </NextLink>
