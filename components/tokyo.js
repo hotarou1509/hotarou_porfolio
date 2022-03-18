@@ -23,7 +23,6 @@ const Tokyo = () => {
   const [clock] = useState(new THREE.Clock());
   const [stats] = useState(new Stats());
   const [_controls, setControls] = useState();
-  const [_mixer, setMixer] = useState();
 
   useEffect(() => {
     const { current: container } = refContainer;
