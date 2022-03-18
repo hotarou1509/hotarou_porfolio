@@ -24,7 +24,7 @@ export function loadGLTFAnimatedModel(
         obj.name = 'tokyo';
         obj.position.y = 3;
         obj.position.x = 1;
-        obj.rotateY(120);
+        obj.rotateY(0.5);
         obj.scale.set(0.013, 0.013, 0.013);
         obj.receiveShadow = reiceiveShadow;
         obj.castShadow = castShadow;

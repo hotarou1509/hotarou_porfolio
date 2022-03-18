@@ -42,7 +42,7 @@ const Kitsune = () => {
 
       // 640 -> 240
       // 8 -> 6
-      const scale = scH * 0.005 + 8.8;
+      const scale = scH * 0.005 + 5.8;
       const camera = new THREE.OrthographicCamera(
         -scale,
         scale,
@@ -76,7 +76,7 @@ const Kitsune = () => {
       controls.target = target;
       setControls(controls);
 
-      loadGLTFModel(scene, '/kitsune/kitsune.gltf', 'LittlestTokyo.glb', {
+      loadGLTFModel(scene, '/kitsune/kitsune.gltf', {
         reiceiveShadow: true,
         castShadow: true,
       }).then(() => {
