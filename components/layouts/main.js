@@ -3,6 +3,7 @@ import Navbar from '../navbar';
 import NoSsr from '../no-ssr';
 import { Box, Container } from '@chakra-ui/react';
 import Kitsune from '../kitsune';
+import Tokyo from '../tokyo';
 
 const Main = ({ children, router }) => {
   return (
@@ -16,7 +17,7 @@ const Main = ({ children, router }) => {
 
       <Container maxW="container.md" pt={14}>
         <NoSsr>
-          <Kitsune />
+          <Tokyo />
         </NoSsr>
         {children}
       </Container>

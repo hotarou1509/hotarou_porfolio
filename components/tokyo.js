@@ -2,13 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import { Box, Spinner } from '@chakra-ui/react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { loadGLTFModel } from '../libs/model';
+import { loadGLTFAnimatedModel } from '../libs/animatedModel';
+import Stats from 'three/examples/jsm/libs/stats.module';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
-function easeOutCirc(x) {
-  return Math.sqrt(1 - Math.pow(x - 1, 4));
-}
-
-const Kitsune = () => {
+const Tokyo = () => {
   const refContainer = useRef();
   const [loading, setLoading] = useState(true);
   const [renderer, setRenderer] = useState();
@@ -22,7 +20,10 @@ const Kitsune = () => {
     )
   );
   const [scene] = useState(new THREE.Scene());
+  const [clock] = useState(new THREE.Clock());
+  const [stats] = useState(new Stats());
   const [_controls, setControls] = useState();
+  const [_mixer, setMixer] = useState();
 
   useEffect(() => {
     const { current: container } = refContainer;
@@ -40,9 +41,16 @@ const Kitsune = () => {
       container.appendChild(renderer.domElement);
       setRenderer(renderer);
 
+      const pmremGenerator = new THREE.PMREMGenerator(renderer);
+
+      scene.environment = pmremGenerator.fromScene(
+        new RoomEnvironment(),
+        0.04
+      ).texture;
+
       // 640 -> 240
       // 8 -> 6
-      const scale = scH * 0.005 + 8.8;
+      const scale = scH * 0.005 + 2.8;
       const camera = new THREE.OrthographicCamera(
         -scale,
         scale,
@@ -58,55 +66,30 @@ const Kitsune = () => {
       const ambientLight = new THREE.AmbientLight(0x101010, 1);
       scene.add(ambientLight);
 
-      // START HERE
-      const light = new THREE.DirectionalLight(0xffffff, 1, 100);
-      light.position.set(1, 1, 1); //default; light shining from top
-      light.castShadow = true; // default false
-      scene.add(light);
-
-      //Set up shadow properties for the light
-      light.shadow.mapSize.width = 512; // default
-      light.shadow.mapSize.height = 512; // default
-      light.shadow.camera.near = 0.5; // default
-      light.shadow.camera.far = 500; // default
-      // END HERE
-
       const controls = new OrbitControls(camera, renderer.domElement);
-      controls.autoRotate = true;
+      controls.autoRotate = false;
       controls.target = target;
       setControls(controls);
 
-      loadGLTFModel(scene, '/kitsune/kitsune.gltf', 'LittlestTokyo.glb', {
+      loadGLTFAnimatedModel(scene, 'LittlestTokyo.glb', {
         reiceiveShadow: true,
         castShadow: true,
-      }).then(() => {
+      }).then(gltf => {
+        const mixer = new THREE.AnimationMixer(gltf.scene);
+        mixer.clipAction(gltf.animations[0]).play();
+        const animate = () => {
+          requestAnimationFrame(animate);
+          const delta = clock.getDelta();
+          mixer.update(delta);
+          controls.update();
+          stats.update();
+          renderer.render(scene, camera);
+        };
         animate();
         setLoading(false);
       });
 
       let req = null;
-      let frame = 0;
-      const animate = () => {
-        req = requestAnimationFrame(animate);
-
-        frame = frame <= 100 ? frame + 1 : frame;
-
-        if (frame <= 100) {
-          const p = initialCameraPosition;
-          const rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 20;
-
-          camera.position.y = 10;
-          camera.position.x =
-            p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed);
-          camera.position.z =
-            p.z * Math.cos(rotSpeed) - p.x * Math.sin(rotSpeed);
-          camera.lookAt(target);
-        } else {
-          controls.update();
-        }
-
-        renderer.render(scene, camera);
-      };
 
       return () => {
         cancelAnimationFrame(req);
@@ -118,7 +101,7 @@ const Kitsune = () => {
   return (
     <Box
       ref={refContainer}
-      className="kitsune"
+      className="tokyo"
       m="auto"
       at={['-20px', '-60px', '-120px']}
       mb={['-20px', '-120px', '-180px']}
@@ -140,4 +123,4 @@ const Kitsune = () => {
   );
 };
 
-export default Kitsune;
+export default Tokyo;
