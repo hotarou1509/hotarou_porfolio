@@ -14,7 +14,7 @@ const Tokyo = () => {
   const [target] = useState(new THREE.Vector3(-0.5, 1.2, 0));
   const [initialCameraPosition] = useState(
     new THREE.Vector3(
-      60 * Math.sin(0.3 * Math.PI),
+      30 * Math.sin(0.3 * Math.PI),
       10,
       20 * Math.cos(0.3 * Math.PI)
     )
