@@ -10,7 +10,6 @@ interface Props {
 }
 
 const PostDetail: NextPage<Props> = ({ post }: Props) => {
-  console.log(post);
   const { author, body, description, mainImage, publishedAt, title } = post;
 
   return (
@@ -40,7 +39,6 @@ const PostDetail: NextPage<Props> = ({ post }: Props) => {
         </Box>
         <Box fontSize="20px" my={5}>
           <PortableText
-            className=""
             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET!}
             projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!}
             content={body}
