@@ -6,7 +6,7 @@ import superjson from "superjson";
 import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import Main from "./main";
+import Layout from "../components/layout";
 import theme from "../utils/theme";
 import { Global } from "@emotion/react";
 
@@ -32,9 +32,9 @@ const MyApp: AppType = ({
     <SessionProvider session={session}>
       <ChakraProvider theme={theme}>
         <Fonts />
-        <Main router={router}>
+        <Layout router={router}>
           <Component {...pageProps} />
-        </Main>
+        </Layout>
       </ChakraProvider>
     </SessionProvider>
   );

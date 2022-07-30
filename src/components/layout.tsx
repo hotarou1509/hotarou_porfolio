@@ -273,7 +273,7 @@ const Footer = () => {
   );
 };
 
-const Main: NextPage<{ children: ReactNode; router: BaseRouter }> = ({
+const Layout: React.FC<{ children: ReactNode; router: BaseRouter }> = ({
   children,
   router,
 }: {
@@ -298,4 +298,4 @@ const Main: NextPage<{ children: ReactNode; router: BaseRouter }> = ({
   );
 };
 
-export default Main;
+export default Layout;
