@@ -8,6 +8,7 @@ import {
   Text,
   Link,
   Button,
+  Avatar,
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 import NextLink from "next/link";
@@ -66,14 +67,7 @@ const HeroPost: React.FC<Post> = (post: Post) => {
             {description}
           </Text>
           <Flex alignItems="center">
-            <Image
-              src={urlFor(author.image).url()!}
-              alt="avatar"
-              w="40px"
-              h="40px"
-              borderRadius="full"
-              mr={3}
-            />
+            <Avatar src={urlFor(author.image).url()!} mr={3} />
             <Heading variant="section-title">{author.name}</Heading>
           </Flex>
         </Box>
@@ -98,14 +92,7 @@ const MorePost: React.FC<Post> = (post: Post) => {
         </Box>
         <Text my={{ base: 0, lg: 2 }}>{description}</Text>
         <Flex alignItems="center">
-          <Image
-            src={urlFor(author.image).url()!}
-            alt="avatar"
-            w="40px"
-            h="40px"
-            borderRadius="full"
-            mr={3}
-          />
+          <Avatar src={urlFor(author.image).url()!} mr={3} />
           <Heading variant="section-title">{author.name}</Heading>
         </Flex>
       </Flex>

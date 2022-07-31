@@ -16,7 +16,6 @@ const MyPhoto = ({ id }: { id: number }) => {
     <Image
       src={`/hotarou_${id}.jpeg`}
       alt={`hotarou_${id}`}
-      height="100%"
       borderRadius="lg"
       shadow="md"
     />

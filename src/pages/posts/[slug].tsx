@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Image } from "@chakra-ui/react";
+import { Avatar, Box, Container, Flex, Heading, Image } from "@chakra-ui/react";
 import { GetStaticProps, NextPage } from "next";
 import React from "react";
 import PortableText from "react-portable-text";
@@ -19,14 +19,7 @@ const PostDetail: NextPage<Props> = ({ post }: Props) => {
         {title}
       </Heading>
       <Flex alignItems="center" pb={10}>
-        <Image
-          src={urlFor(author.image).url()!}
-          alt="avatar"
-          w="40px"
-          h="40px"
-          borderRadius="full"
-          mr={3}
-        />
+        <Avatar src={urlFor(author.image).url()!} mr={3} />
         <Heading variant="section-title">{author.name}</Heading>
       </Flex>
       <Image src={urlFor(mainImage).url()!} alt="cover" cursor="pointer" />
