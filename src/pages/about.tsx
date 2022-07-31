@@ -40,7 +40,7 @@ const SectionIntro = () => {
             <p style={{ marginBottom: 15 }}>(... or you can call me Hōtarō)</p>
             <p style={{ marginBottom: 10, textIndent: "1em" }}>
               ⌨️ I&apos;ve been coding for nearly 6 years. I&apos;m a senior
-              software developer who loves bulding full-stack applications &
+              software developer who loves building full-stack applications &
               learning new technologies.
             </p>
             <p style={{ marginBottom: 10, textIndent: "1em" }}>
@@ -101,7 +101,7 @@ const SectionBio = () => {
             </p>
             <Heading fontSize="xl">✨ 2020-present</Heading>
             <p style={{ marginBottom: 10, textIndent: "1em" }}>
-              Worked as a full-stack web developer at intX Vietnam 🌐
+              Full-stack web developer at intX Vietnam 🌐
             </p>
           </Box>
         </Box>

@@ -56,7 +56,7 @@ const Intro = () => {
               </p>
               <p>
                 👨‍💻 I&apos;ve got a knack for all things launching products, from
-                planning and designing all the way to solve real-life problems
+                planning and designing all the way to solving real-life problems
                 with code.
               </p>
             </Box>
