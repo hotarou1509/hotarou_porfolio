@@ -5,10 +5,14 @@ import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, useColorModeValue } from "@chakra-ui/react";
 import Layout from "../components/layout";
 import theme from "../utils/theme";
 import { Global } from "@emotion/react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Box } from "@chakra-ui/react";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 const Fonts = () => (
   <Global

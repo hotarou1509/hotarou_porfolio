@@ -1,5 +1,4 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import type { NextPage } from "next";
 import NextLink from "next/link";
 import Head from "next/head";
 import {
