@@ -9,8 +9,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Layout from "../components/layout";
 import theme from "../utils/theme";
 import { Global } from "@emotion/react";
-import { useState } from "react";
-import dynamic from "next/dynamic";
 import Router from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -35,8 +33,6 @@ const MyApp: AppType = ({
   pageProps: { session, ...pageProps },
   router,
 }) => {
-  const [loading, setLoading] = useState(false);
-
   Router.events.on("routeChangeStart", () => {
     NProgress.start();
   });

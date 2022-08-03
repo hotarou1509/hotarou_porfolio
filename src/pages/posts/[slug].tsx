@@ -1,4 +1,13 @@
-import { Avatar, Box, Container, Flex, Heading, Image } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Container,
+  Divider,
+  Flex,
+  Heading,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import { GetStaticProps, NextPage } from "next";
 import React from "react";
 import PortableText from "react-portable-text";
@@ -65,6 +74,11 @@ const PostDetail: NextPage<Props> = ({ post }: Props) => {
               ),
             }}
           />
+        </Box>
+        <Divider />
+        <Box py={5}>
+          <Text>Enjoy this post?</Text>
+          <Heading>Leave the comment below!</Heading>
         </Box>
       </Container>
     </Container>
