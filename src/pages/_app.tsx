@@ -5,14 +5,17 @@ import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
-import { ChakraProvider, useColorModeValue } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import Layout from "../components/layout";
 import theme from "../utils/theme";
 import { Global } from "@emotion/react";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { Box } from "@chakra-ui/react";
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+import Router from "next/router";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+
+NProgress.configure({ showSpinner: false });
 
 const Fonts = () => (
   <Global
@@ -32,6 +35,16 @@ const MyApp: AppType = ({
   pageProps: { session, ...pageProps },
   router,
 }) => {
+  const [loading, setLoading] = useState(false);
+
+  Router.events.on("routeChangeStart", () => {
+    NProgress.start();
+  });
+
+  Router.events.on("routeChangeComplete", () => {
+    NProgress.done();
+  });
+
   return (
     <SessionProvider session={session}>
       <ChakraProvider theme={theme}>
