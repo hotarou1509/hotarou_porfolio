@@ -15,6 +15,7 @@ import NextLink from "next/link";
 import React, { useState } from "react";
 import { sanityClient, urlFor } from "../../../sanity";
 import Section from "../../components/section";
+import { CommentDTO } from "../../server/router/comment";
 
 export interface Post {
   _id: string;
@@ -23,6 +24,7 @@ export interface Post {
     name: string;
     image: string;
   };
+  comments: Comment[];
   title: string;
   description: string;
   mainImage: {
@@ -34,6 +36,18 @@ export interface Post {
     current: string;
   };
   body: [object];
+}
+
+interface Comment extends CommentDTO {
+  post: {
+    _ref: string;
+    _type: string;
+  };
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: string;
+  _updatedAt: string;
 }
 
 interface Props {

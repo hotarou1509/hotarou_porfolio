@@ -46,6 +46,20 @@ const components = {
       color: mode("gray.800", "gray.50")(props),
     }),
   },
+  Button: {
+    variants: {
+      app: (props: GlobalStyleProps) => ({
+        border: "1px",
+        bg: mode("gray.900", "gray.50")(props),
+        color: mode("whiteAlpha.800", "gray.800")(props),
+        _hover: {
+          background: mode("gray.100", "gray.800")(props),
+          borderColor: mode("gray.800", "whiteAlpha.900")(props),
+          color: mode("gray.800", "whiteAlpha.900")(props),
+        },
+      }),
+    },
+  },
 };
 
 const fonts = {
