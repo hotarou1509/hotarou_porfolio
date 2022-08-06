@@ -24,6 +24,7 @@ import { trpc } from "../../utils/trpc";
 import { CommentDTO } from "../../server/router/comment";
 import { z } from "zod";
 import { useRouter } from "next/router";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 interface Props {
   post: Post;
@@ -60,6 +61,7 @@ const PostDetail: NextPage<Props> = ({ post }: Props) => {
   const {
     control,
     handleSubmit,
+    resetField,
     formState: { errors },
   } = useForm<IFormInput>({
     resolver: yupResolver(schema),
@@ -68,8 +70,19 @@ const PostDetail: NextPage<Props> = ({ post }: Props) => {
   // Send comment handle
   const comments = trpc.useQuery(["comment.getAll", { post_id: _id }]).data;
 
-  const { mutate } = trpc.useMutation(["comment.send"], {
-    onSuccess: () => router.reload(),
+  console.log(comments);
+
+  const sendCmt = trpc.useMutation(["comment.send"], {
+    onSuccess: () => {
+      resetField("comment");
+      router.replace(router.asPath);
+    },
+  });
+
+  const delCmt = trpc.useMutation(["comment.delete"], {
+    onSuccess: () => {
+      router.replace(router.asPath);
+    },
   });
 
   const onSubmit: SubmitHandler<IFormInput> = (formValue) => {
@@ -83,7 +96,7 @@ const PostDetail: NextPage<Props> = ({ post }: Props) => {
         comment: formValue.comment,
         post_id: _id,
       };
-      mutate(data);
+      sendCmt.mutate(data);
     } else {
       alert(user.error);
     }
@@ -224,11 +237,25 @@ const PostDetail: NextPage<Props> = ({ post }: Props) => {
             <Box py={5}>
               {comments.map((value, idx) => (
                 <Flex key={idx} pb={5}>
-                  <Avatar mr={3} size="sm" src={`${value.image}`} />
+                  <Avatar mr={3} size="md" src={`${value.image}`} />
                   <Box>
-                    <Text fontSize="16px" color="gray.500">
+                    <Text fontSize="18px" color="gray.500">
                       {value.name}
                     </Text>
+                    <Flex alignItems="baseline">
+                      <Text fontSize="14px" color="gray.500">{`${new Date(
+                        value.created_at
+                      ).toLocaleString()}`}</Text>
+                      <Text color="gray.500" mx={2}>
+                        •
+                      </Text>
+                      <DeleteIcon
+                        fontSize="sm"
+                        color="gray.500"
+                        cursor="pointer"
+                        onClick={() => delCmt.mutate({ id: value.id })}
+                      />
+                    </Flex>
                     <Text py={2}>{value.comment}</Text>
                   </Box>
                 </Flex>
@@ -294,6 +321,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       post,
     },
-    revalidate: 30,
   };
 };

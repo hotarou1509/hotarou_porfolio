@@ -77,9 +77,16 @@ const HeroPost: React.FC<Post> = (post: Post) => {
           <Text>{new Date(publishedAt).toLocaleString()}</Text>
         </Box>
         <Box w={{ base: "100%", lg: "50%" }}>
-          <Text my={5} fontSize="20px">
-            {description}
-          </Text>
+          <Flex>
+            <Text my={5} fontSize="20px">
+              {description}
+              <NextLink href={linkToContent} passHref>
+                <Link ml={2} fontSize="16px" color="gray.500">
+                  ... See more →
+                </Link>
+              </NextLink>
+            </Text>
+          </Flex>
           <Flex alignItems="center">
             <Avatar src={urlFor(author.image).url()!} mr={3} />
             <Heading variant="section-title">{author.name}</Heading>
@@ -96,15 +103,22 @@ const MorePost: React.FC<Post> = (post: Post) => {
     return (
       <Flex w="100%" direction="column" gap={5}>
         <NextLink href={`/posts/${slug.current}`}>
-          <Image src={urlFor(mainImage).url()!} alt="cover" />
+          <Image src={urlFor(mainImage).url()!} alt="cover" cursor="pointer" />
         </NextLink>
-        <Box w="100%">
+        <Box w="100%" cursor="pointer">
           <NextLink href={`/posts/${slug.current}`}>
             <Heading>{title}</Heading>
           </NextLink>
           <Text>{new Date(publishedAt).toLocaleString()}</Text>
         </Box>
-        <Text my={{ base: 0, lg: 2 }}>{description}</Text>
+        <Text my={{ base: 0, lg: 2 }}>
+          {description}
+          <NextLink href={`/posts/${slug.current}`}>
+            <Link ml={2} fontSize="16px" color="gray.500">
+              ... See more →
+            </Link>
+          </NextLink>
+        </Text>
         <Flex alignItems="center">
           <Avatar src={urlFor(author.image).url()!} mr={3} />
           <Heading variant="section-title">{author.name}</Heading>
@@ -150,12 +164,12 @@ const Posts: NextPage<Props> = ({ posts }: Props) => {
           {moreStories.length !== 0 ? (
             moreStories.map((post) => {
               return (
-                <>
+                <Box key={post._id}>
                   <Box w={{ base: "100%", lg: "50%" }}>
                     <MorePost {...post} />
                   </Box>
                   <Divider display={{ base: "block", lg: "none" }} />
-                </>
+                </Box>
               );
             })
           ) : (
@@ -197,6 +211,7 @@ export const getServerSideProps = async () => {
     mainImage,
     slug,
     publishedAt,
+    categories
   }`;
 
   const posts = await sanityClient.fetch(query);

@@ -44,6 +44,23 @@ export const commentRouter = createRouter()
       }
     },
   })
+  .mutation("delete", {
+    input: z.object({
+      id: z.string({
+        required_error: "Post id is required",
+        invalid_type_error: "Post id must be a string",
+      }),
+    }),
+    async resolve({ ctx, input }) {
+      try {
+        return await ctx.prisma.comment.delete({
+          where: { id: input.id },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  })
   .query("getAll", {
     input: z.object({
       post_id: z.string({
