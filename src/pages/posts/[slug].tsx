@@ -48,16 +48,8 @@ const schema = yup
   .required();
 
 const PostDetail: NextPage<Props> = ({ post }: Props) => {
-  const {
-    _id,
-    author,
-    body,
-    description,
-    mainImage,
-    publishedAt,
-    title,
-    comments,
-  } = post;
+  const { _id, author, body, description, mainImage, publishedAt, title } =
+    post;
 
   const router = useRouter();
 
@@ -74,6 +66,8 @@ const PostDetail: NextPage<Props> = ({ post }: Props) => {
   });
 
   // Send comment handle
+  const comments = trpc.useQuery(["comment.getAll", { post_id: _id }]).data;
+
   const { mutate } = trpc.useMutation(["comment.send"], {
     onSuccess: () => router.reload(),
   });
@@ -224,12 +218,12 @@ const PostDetail: NextPage<Props> = ({ post }: Props) => {
             </Flex>
           </form>
         </Box>
-        {comments && (
+        {Array.isArray(comments) && (
           <>
             <Divider />
             <Box py={5}>
-              {comments.map((value) => (
-                <Flex key={value._id} pb={5}>
+              {comments.map((value, idx) => (
+                <Flex key={idx} pb={5}>
                   <Avatar mr={3} size="sm" src={`${value.image}`} />
                   <Box>
                     <Text fontSize="16px" color="gray.500">
@@ -280,9 +274,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       name,
       image
     },
-    'comments':*[_type == "comment" && 
-      post._ref == ^._id 
-    ] | order(_createdAt desc),
     description,
     mainImage,
     slug,
