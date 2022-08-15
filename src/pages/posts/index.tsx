@@ -103,7 +103,12 @@ const MorePost: React.FC<Post> = (post: Post) => {
     return (
       <Flex w="100%" direction="column" gap={5}>
         <NextLink href={`/posts/${slug.current}`}>
-          <Image src={urlFor(mainImage).url()!} alt="cover" cursor="pointer" />
+          <Image
+            src={urlFor(mainImage).url()!}
+            w="100%"
+            alt="cover"
+            cursor="pointer"
+          />
         </NextLink>
         <Box w="100%" cursor="pointer">
           <NextLink href={`/posts/${slug.current}`}>
@@ -164,8 +169,8 @@ const Posts: NextPage<Props> = ({ posts }: Props) => {
           {moreStories.length !== 0 ? (
             moreStories.map((post) => {
               return (
-                <Box key={post._id}>
-                  <Box w={{ base: "100%", lg: "50%" }}>
+                <Box key={post._id} w={{ base: "100%", lg: "50%" }}>
+                  <Box>
                     <MorePost {...post} />
                   </Box>
                   <Divider display={{ base: "block", lg: "none" }} />
